@@ -1,0 +1,73 @@
+#! /bin/bash
+
+TAG="LA.UM.9.1.r1-10600-SMxxx0.0" # make sure what tag branch you need to merged x update
+TECHPACK="LA.UM.9.12.r1-12800.01-SMxx50.QSSI12.0" # make sure what tag branch you need to merged [ techpack ]
+TYPE="techpack-audio" # make sure what do want to do. update / merged
+
+git config --global user.name "vcyzteen" # your username github
+git config --global user.email "vcyzscape@gmail.com" # your email github
+        
+if [ $TYPE = "merged" ]
+then
+      # qcacld
+      git remote add qcacld https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/qcacld-3.0
+      git fetch qcacld $TAG
+      git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
+      git read-tree --prefix=drivers/staging/qcacld-3.0 -u FETCH_HEAD
+      git commit -m "INITIAL MERGED qcacld-3.0 into $TAG" --signoff
+
+      # fw-api
+      git remote add fw-api https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/fw-api
+      git fetch fw-api $TAG
+      git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
+      git read-tree --prefix=drivers/staging/fw-api -u FETCH_HEAD
+      git commit -m "INITIAL MERGED fw-api into $TAG" --signoff
+
+      # qca-wifi-host-cmn
+      git remote add qca-wifi-host-cmn https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/qca-wifi-host-cmn
+      git fetch qca-wifi-host-cmn $TAG
+      git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
+      git read-tree --prefix=drivers/staging/qca-wifi-host-cmn -u FETCH_HEAD
+      git commit -m "INITIAL MERGED qca-wifi-host into $TAG" --signoff
+fi
+
+if [ $TYPE = "update" ]
+then
+      # update qcacld
+      git remote add qcacld https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/qcacld-3.0
+      git fetch qcacld $TAG
+      git merge -X subtree=drivers/staging/qcacld-3.0 --no-commit FETCH_HEAD
+      git commit -m "MERGED UPDATE: qcacld into $TAG" --signoff
+
+      # update fw-api
+      git remote add fw-api https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/fw-api
+      git fetch fw-api $TAG
+      git merge -X subtree=drivers/staging/fw-api --no-commit FETCH_HEAD
+      git commit -m "MERGED UPDATE: fw-api into $TAG" --signoff
+
+      # update qca-host-wifi-cmn
+      git remote add qca-wifi-host-cmn https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/qca-wifi-host-cmn
+      git fetch qca-wifi-host-cmn $TAG
+      git merge -X subtree=drivers/staging/qca-wifi-host-cmn --no-commit FETCH_HEAD
+      git commit -m "MERGED UPDATE: qca-host-wifi-cmn into $TAG" --signoff
+fi
+
+if [ $TYPE = "techpack-audio" ]
+then
+      # techpack audio
+      git remote add techpack-audio https://source.codeaurora.org/quic/la/platform/vendor/opensource/audio-kernel
+      git fetch techpack-audio $TECHPACK
+      git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
+      git read-tree --prefix=techpack/audio -u FETCH_HEAD
+      git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
+fi
+
+if [ $TYPE = "techpack-data" ]
+then
+      # techpack data
+      git remote add techpack-data https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/data-kernel
+      git fetch techpack-data $TECHPACK
+      git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
+      git read-tree --prefix=techpack/data -u FETCH_HEAD
+      git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
+fi
