@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 # Enviroment
 TAG="LA.UM.9.1.r1-10600-SMxxx0.0" # make sure what tag branch you need to merged x update
@@ -9,7 +9,7 @@ TYPE="techpack-audio" # make sure what do want to do. update / merged
 git config --global user.name "vcyzteen" # your username github
 git config --global user.email "vcyzscape@gmail.com" # your email github
         
-if [ $TYPE = "merged" ]
+if [ $TYPE = "merged-initial" ]
 then
       # qcacld
       git remote add qcacld https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/qcacld-3.0
@@ -33,7 +33,27 @@ then
       git commit -m "INITIAL MERGED qca-wifi-host into $TAG" --signoff
 fi
 
-if [ $TYPE = "update" ]
+if [ $TYPE = "techpack-audio" ]
+then
+      # techpack audio
+      git remote add techpack-audio https://source.codeaurora.org/quic/la/platform/vendor/opensource/audio-kernel
+      git fetch techpack-audio $TECHPACK
+      git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
+      git read-tree --prefix=techpack/audio -u FETCH_HEAD
+      git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
+fi
+
+if [ $TYPE = "techpack-data" ]
+then
+      # techpack data
+      git remote add techpack-data https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/data-kernel
+      git fetch techpack-data $TECHPACK
+      git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
+      git read-tree --prefix=techpack/data -u FETCH_HEAD
+      git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
+fi
+
+if [ $TYPE = "update-drivers" ]
 then
       # update qcacld
       git remote add qcacld https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/qcacld-3.0
@@ -54,22 +74,17 @@ then
       git commit -m "MERGED UPDATE: qca-host-wifi-cmn into $TAG" --signoff
 fi
 
-if [ $TYPE = "techpack-audio" ]
+if [ $TYPE = "update-techpack" ]
 then
-      # techpack audio
+      # update qcacld
       git remote add techpack-audio https://source.codeaurora.org/quic/la/platform/vendor/opensource/audio-kernel
       git fetch techpack-audio $TECHPACK
-      git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
-      git read-tree --prefix=techpack/audio -u FETCH_HEAD
-      git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
-fi
-
-if [ $TYPE = "techpack-data" ]
-then
-      # techpack data
+      git merge -X subtree=techpack/audio --no-commit FETCH_HEAD
+      git commit -m "MERGED UPDATE: techpack/audio into $TECHPACK" --signoff
+      
+      # update qca-host-wifi-cmn
       git remote add techpack-data https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/data-kernel
       git fetch techpack-data $TECHPACK
-      git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
-      git read-tree --prefix=techpack/data -u FETCH_HEAD
-      git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
+      git merge -X subtree=techpack/data --no-commit FETCH_HEAD
+      git commit -m "MERGED UPDATE: techpack/data into $TECHPACK" --signoff
 fi

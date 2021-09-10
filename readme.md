@@ -5,5 +5,5 @@
   * Open file baka-merged
   * edit account and username github
   * Edit tag you need to merged for example LA.UM xxxxxxxxxxxxxx
-  * Edit type what you want to use `update x merged x techpack-data/audio`
+  * Edit type what you want to use `merged x update-drivers/techpack x techpack-data/audio`
   * Use CI/CD or localy and run with `bash baka-merged`
