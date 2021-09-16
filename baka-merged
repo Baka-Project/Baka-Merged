@@ -53,6 +53,33 @@ then
       git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
 fi
 
+if [ $TYPE = "techpack-video" ]
+then
+     git remote add techpack-video https://source.codeaurora.org/quic/la/platform/vendor/opensource/video-driver
+     git fetch techpack-video $TECHPACK
+     git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
+     git read-tree --prefix=techpack/video -u FETCH_HEAD
+     git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
+fi
+
+if [ $TYPE = "techpack-camera" ]
+then
+     git remote add techpack-camera https://source.codeaurora.org/quic/la/platform/vendor/opensource/camera-kernel
+     git fetch techpack-camera $TECHPACK
+     git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
+     git read-tree --prefix=techpack/camera -u FETCH_HEAD
+     git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
+fi
+
+if [ $TYPE = "techpack-display" ]
+then
+     git remote add techpack-display https://source.codeaurora.org/quic/la/platform/vendor/opensource/display-drivers
+     git fetch techpack-display $TECHPACK
+     git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
+     git read-tree --prefix=techpack/camera -u FETCH_HEAD
+     git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
+fi
+
 if [ $TYPE = "update-drivers" ]
 then
       # update qcacld
@@ -76,15 +103,28 @@ fi
 
 if [ $TYPE = "update-techpack" ]
 then
-      # update qcacld
       git remote add techpack-audio https://source.codeaurora.org/quic/la/platform/vendor/opensource/audio-kernel
       git fetch techpack-audio $TECHPACK
       git merge -X subtree=techpack/audio --no-commit FETCH_HEAD
       git commit -m "MERGED UPDATE: techpack/audio into $TECHPACK" --signoff
       
-      # update qca-host-wifi-cmn
       git remote add techpack-data https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/data-kernel
       git fetch techpack-data $TECHPACK
       git merge -X subtree=techpack/data --no-commit FETCH_HEAD
       git commit -m "MERGED UPDATE: techpack/data into $TECHPACK" --signoff
+
+      git remote add techpack-video https://source.codeaurora.org/quic/la/platform/vendor/opensource/video-driver
+      git fetch techpack-video $TECHPACK
+      git merge -X subtree=techpack/video --no-commit FETCH_HEAD
+      git commit -m "MERGED UPDATE: techpack/video into $TECHPACK" --signoff
+
+      git remote add techpack-camera https://source.codeaurora.org/quic/la/platform/vendor/opensource/camera-kernel
+      git fetch techpack-camera $TECHPACK
+      git merge -X subtree=techpack/camera --no-commit FETCH_HEAD
+      git commit -m "MERGED UPDATE: techpack/camera into $TECHPACK" --signoff
+
+      git remote add techpack-display https://source.codeaurora.org/quic/la/platform/vendor/opensource/display-drivers
+      git fetch techpack-display $TECHPACK
+      git merge -X subtree=techpack/display --no-commit FETCH_HEAD
+      git commit -m "MERGED UPDATE: techpack/display into $TECHPACK" --signoff
 fi
