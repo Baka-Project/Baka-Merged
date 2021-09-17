@@ -3,6 +3,7 @@
 # Enviroment
 TAG="LA.UM.9.1.r1-10600-SMxxx0.0" # make sure what tag branch you need to merged x update
 TECHPACK="LA.UM.9.12.r1-12800.01-SMxx50.QSSI12.0" # make sure what tag branch you need to merged [ techpack ]
+WIREGUARD="stable" # make sure what branch do you want to merged wireguard android kernel linux
 TYPE="techpack-audio" # make sure what do want to do. update / merged
 
 # Account and gmail
@@ -31,6 +32,14 @@ then
       git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
       git read-tree --prefix=drivers/staging/qca-wifi-host-cmn -u FETCH_HEAD
       git commit -m "INITIAL MERGED qca-wifi-host into $TAG" --signoff
+fi
+
+if [ $TYPE = "wireguard"
+then
+      git remote add Guard https://git.zx2c4.com/wireguard-linux
+      git fetch Guard $WIREGUARD
+      git merge --no-commit FETCH_HEAD
+      git commit -m "Importing Wireguard into kernel" --signoff
 fi
 
 if [ $TYPE = "techpack-audio" ]
