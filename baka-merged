@@ -34,7 +34,7 @@ then
       git commit -m "INITIAL MERGED qca-wifi-host into $TAG" --signoff
 fi
 
-if [ $TYPE = "wireguard"
+if [ $TYPE = "wireguard" ]
 then
       git remote add Guard https://git.zx2c4.com/wireguard-linux
       git fetch Guard $WIREGUARD
