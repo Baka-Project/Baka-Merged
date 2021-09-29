@@ -12,3 +12,12 @@
     techpack-data/audio # as merged techpack audio and data
     ```
   * Use CI/CD or localy and run with `bash baka-merged`
+  * Note!!
+
+    * uncomment like this if you want use ci/cd for merged and push simple
+
+      * `# REPOSITORY` --> REPOSITORY
+
+      * `# GITHUB_TOKEN` --> GITHUB_TOKEN
+
+      * `# git push` --> git push
