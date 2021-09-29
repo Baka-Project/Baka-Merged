@@ -7,7 +7,10 @@ WIREGUARD="stable" # make sure what branch do you want to merged wireguard andro
 TYPE="techpack-audio" # make sure what do want to do. update / merged
 
 # repo github that you use
-REPOSITORY="Baka-Project/Baka-Msm-4.4.git" # fill it with your repo need to push
+# REPOSITORY="Baka-Project/Baka-Msm-4.4.git" # uncomment and fill it with your repo need to push with ci cd
+
+# github token ( for ci cd )
+# GITHUB_TOKEN="" # uncomment and fill this if you want merged use ci cd
 
 # Account and gmail
 git config --global user.name "vcyzteen" # your username github
@@ -37,7 +40,7 @@ then
       git commit -m "INITIAL MERGED qca-wifi-host into $TAG" --signoff
 
       # push the commit
-      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
+      S git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "wireguard" ]
@@ -48,7 +51,7 @@ then
       git commit -m "Importing Wireguard into kernel" --signoff
 
       # push the commit
-      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
+      # git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "techpack-audio" ]
@@ -61,7 +64,7 @@ then
       git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
 
       # push the commit
-      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
+      # git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "techpack-data" ]
@@ -74,7 +77,7 @@ then
       git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
 
       # push the commit
-      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
+      # git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "techpack-video" ]
@@ -86,7 +89,7 @@ then
       git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
 
       # push the commit
-      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
+      # git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "techpack-camera" ]
@@ -98,7 +101,7 @@ then
       git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
 
       # push the commit
-      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
+      # git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "techpack-display" ]
@@ -110,7 +113,7 @@ then
       git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
 
       # push the commit
-      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
+      # git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "update-drivers" ]
@@ -134,7 +137,7 @@ then
       git commit -m "MERGED UPDATE: qca-host-wifi-cmn into $TAG" --signoff
 
       # push the commit
-      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
+      # git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "update-techpack" ]
@@ -165,5 +168,5 @@ then
       git commit -m "MERGED UPDATE: techpack/display into $TECHPACK" --signoff
 
       # push the commit
-      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
+      # git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
