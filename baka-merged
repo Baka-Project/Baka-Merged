@@ -6,6 +6,9 @@ TECHPACK="LA.UM.9.12.r1-12800.01-SMxx50.QSSI12.0" # make sure what tag branch yo
 WIREGUARD="stable" # make sure what branch do you want to merged wireguard android kernel linux
 TYPE="techpack-audio" # make sure what do want to do. update / merged
 
+# repo github that you use
+REPOSITORY="Baka-Project/Baka-Msm-4.4.git" # fill it with your repo need to push
+
 # Account and gmail
 git config --global user.name "vcyzteen" # your username github
 git config --global user.email "vcyzscape@gmail.com" # your email github
@@ -32,6 +35,9 @@ then
       git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
       git read-tree --prefix=drivers/staging/qca-wifi-host-cmn -u FETCH_HEAD
       git commit -m "INITIAL MERGED qca-wifi-host into $TAG" --signoff
+
+      # push the commit
+      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "wireguard" ]
@@ -40,6 +46,9 @@ then
       git fetch Guard $WIREGUARD
       git merge --no-commit FETCH_HEAD
       git commit -m "Importing Wireguard into kernel" --signoff
+
+      # push the commit
+      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "techpack-audio" ]
@@ -50,6 +59,9 @@ then
       git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
       git read-tree --prefix=techpack/audio -u FETCH_HEAD
       git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
+
+      # push the commit
+      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "techpack-data" ]
@@ -60,6 +72,9 @@ then
       git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
       git read-tree --prefix=techpack/data -u FETCH_HEAD
       git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
+
+      # push the commit
+      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "techpack-video" ]
@@ -69,6 +84,9 @@ then
       git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
       git read-tree --prefix=techpack/video -u FETCH_HEAD
       git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
+
+      # push the commit
+      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "techpack-camera" ]
@@ -78,6 +96,9 @@ then
       git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
       git read-tree --prefix=techpack/camera -u FETCH_HEAD
       git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
+
+      # push the commit
+      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "techpack-display" ]
@@ -87,6 +108,9 @@ then
       git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
       git read-tree --prefix=techpack/camera -u FETCH_HEAD
       git commit -m "INITIAL MERGED techpack into $TECHPACK" --signoff
+
+      # push the commit
+      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "update-drivers" ]
@@ -108,6 +132,9 @@ then
       git fetch qca-wifi-host-cmn $TAG
       git merge -X subtree=drivers/staging/qca-wifi-host-cmn --no-commit FETCH_HEAD
       git commit -m "MERGED UPDATE: qca-host-wifi-cmn into $TAG" --signoff
+
+      # push the commit
+      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "update-techpack" ]
@@ -136,4 +163,7 @@ then
       git fetch techpack-display $TECHPACK
       git merge -X subtree=techpack/display --no-commit FETCH_HEAD
       git commit -m "MERGED UPDATE: techpack/display into $TECHPACK" --signoff
+
+      # push the commit
+      git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
