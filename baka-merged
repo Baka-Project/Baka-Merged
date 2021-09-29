@@ -40,7 +40,7 @@ then
       git commit -m "INITIAL MERGED qca-wifi-host into $TAG" --signoff
 
       # push the commit
-      S git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
+      # git push https://$GITHUB_TOKEN@github.com/$REPOSITORY
 fi
 
 if [ $TYPE = "wireguard" ]
