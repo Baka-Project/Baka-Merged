@@ -16,7 +16,7 @@ TYPE="merged-initial" # make sure what do want to do. update or merged
 git config --global user.name "vcyzteen" # your username github
 git config --global user.email "vcyzscape@gmail.com" # your email github
         
-if [ $TYPE == "merged-initial" ]
+if [ $TYPE = "merged-initial" ]
 then
       # qcacld
       git remote add qcacld https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/qcacld-3.0
