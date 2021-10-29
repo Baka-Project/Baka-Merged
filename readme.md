@@ -15,7 +15,10 @@
     update-drivers/techpack # as update driver qcacld - fw api - qcm | techpack
     techpack-initial/data/audio/video/camera/display # as merged techpack audio and data
     ```
-  * Use CI/CD or localy and run with `bash baka-merged or ./baka-merged`
+  * Use CI/CD or localy and run with
+     ```
+     bash baka-merged or ./baka-merged
+     ```
   * Note!!
 
     * uncomment like this if you want use ci/cd for merged and push simple
