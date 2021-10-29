@@ -18,7 +18,7 @@ TYPE="merged-initial" # make sure what do want to do. update or merged
 # REPOSITORY="Baka-Project/Baka-Msm-4.4.git" # uncomment and fill it with your repo need to push with ci cd
 
 # github token ( for ci cd )
-# GITHUB_TOKEN="" # uncomment and fill this if you want merged use ci cd
+# GITHUB_TOKEN="$TOKEN_GH" # uncomment and connect to environment variable from your ci/cd write as $TOKEN_GH
 
 # Account and gmail
 git config --global user.name "vcyzteen" # your username github
