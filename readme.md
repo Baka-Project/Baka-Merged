@@ -13,7 +13,7 @@
     ```
     merged-initial # as merged qcacld - fw api - qcmn
     update-drivers/techpack # as update driver qcacld - fw api - qcm | techpack
-    techpack-data/audio # as merged techpack audio and data
+    techpack-initial/data/audio/video/camera/display # as merged techpack audio and data
     ```
   * Use CI/CD or localy and run with `bash baka-merged or ./baka-merged`
   * Note!!
