@@ -2,9 +2,13 @@
   * Why im make this?. because im lazy to write every time if i'am merged. so i decided to make script like that make its simple to merged drivers kernel and everyone who want to use will know too.
 
 #### how to use?
-  * wget file
+  * wget file ( local ) `wget first and edit file`
    ```
    wget https://raw.githubusercontent.com/Baka-Project/Baka-Merged/baka/baka-merged
+   ```
+  * curl file ( ci/cd ) `edit file first before run`
+   ```
+   curl https://raw.githubusercontent.com/(your username github)/Baka-Merged/baka/baka-merged | sh
    ```
   * Open file baka-merged
   * edit account and username github
